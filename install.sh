@@ -171,7 +171,10 @@ fi
 
 # --- Plugins, parsers, language servers --------------------------------------
 step "Installing plugins, parsers and language servers (a few minutes)"
-nvim --headless -c "luafile $NVIM_DIR/scripts/bootstrap.lua" || die "Setup inside Neovim failed (see above). Fix it and run this again."
+# pcall + cquit: if the script errors, exit with a failure instead of leaving Neovim open
+BOOTSTRAP="$NVIM_DIR/scripts/bootstrap.lua"
+nvim --headless -c "lua local ok, err = pcall(dofile, [[$BOOTSTRAP]]) if not ok then io.stderr:write(tostring(err) .. '\n') vim.cmd('cquit 1') end" ||
+  die "Setup inside Neovim failed (see above). Fix it and run this again."
 
 printf '\n%s%sDone!%s\n' "$green" "$bold" "$reset"
 cat <<EOF
