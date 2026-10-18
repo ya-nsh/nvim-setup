@@ -1,5 +1,5 @@
--- Headless first-time setup, run by install.sh:
---   nvim --headless -c "luafile scripts/bootstrap.lua"
+-- Headless first-time setup, run by install.sh (which also catches errors here):
+--   nvim --headless -c "lua dofile('scripts/bootstrap.lua')"
 -- Installs plugins, syntax parsers, language servers and formatters, waiting for
 -- each step, then exits with a non-zero code if anything failed.
 local failed = {}
