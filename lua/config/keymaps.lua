@@ -114,18 +114,12 @@ require("config.context_menu").setup()
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit (asks to save)" })
 
--- Cheatsheet
-local cheatsheet = vim.fn.stdpath("config") .. "/CHEATSHEET.md"
-vim.api.nvim_create_user_command("Cheatsheet", function()
-  Snacks.win({
-    file = cheatsheet,
-    width = 0.75,
-    height = 0.85,
-    border = "rounded",
-    title = " Cheatsheet  (q to close) ",
-    title_pos = "center",
-    bo = { modifiable = false, filetype = "markdown" },
-    wo = { wrap = true, conceallevel = 2, spell = false, number = false, relativenumber = false },
-  })
-end, { desc = "Open the VS Code to Neovim cheatsheet" })
-map("n", "<leader>?", "<cmd>Cheatsheet<cr>", { desc = "Cheatsheet" })
+-- Help: ? opens a window explaining every shortcut (CHEATSHEET.md).
+-- This replaces Vim's backward search; search forward with / and use N instead.
+-- In the explorer, Lazy and Mason, ? still shows that window's own keys.
+local function help()
+  require("config.help").toggle()
+end
+vim.api.nvim_create_user_command("Cheatsheet", help, { desc = "Every shortcut, explained" })
+map("n", "?", help, { desc = "Help: every shortcut explained" })
+map("n", "<leader>?", help, { desc = "Help: every shortcut explained" })
