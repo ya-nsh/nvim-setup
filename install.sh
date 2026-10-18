@@ -76,7 +76,9 @@ if [ "$SKIP_BREW" -eq 0 ]; then
   step "Command-line tools"
   # neovim, git, ripgrep (search), fd (file finder), lazygit (git UI),
   # tree-sitter-cli (builds syntax parsers)
-  formulae=(neovim git ripgrep fd lazygit tree-sitter-cli)
+  formulae=(neovim ripgrep fd lazygit tree-sitter-cli)
+  # Apple's git (installed with Homebrew's command line tools) is fine
+  git --version >/dev/null 2>&1 || formulae+=(git)
   # Language servers need these; keep your own install (nvm, asdf, ...) if you have one
   command -v npm >/dev/null 2>&1 || formulae+=(node)
   command -v go >/dev/null 2>&1 || formulae+=(go)
