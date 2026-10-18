@@ -17,6 +17,22 @@ return {
 
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
+  -- Draws the tables and headings in the ? help window (only there)
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "cheatsheet",
+    opts = {
+      file_types = { "cheatsheet" },
+      render_modes = true, -- stay drawn while moving around
+      anti_conceal = { enabled = false },
+      completions = { blink = { enabled = false } },
+      heading = { sign = false, width = "block", left_pad = 1, right_pad = 2 },
+      code = { sign = false },
+      pipe_table = { preset = "round" },
+      latex = { enabled = false }, -- no math in the help; skips the LaTeX tools check
+    },
+  },
+
   -- Status bar at the bottom
   {
     "nvim-lualine/lualine.nvim",

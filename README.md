@@ -40,7 +40,7 @@ Options: `--skip-brew` (manage packages yourself), `--no-ghostty`.
 | Multiple cursors | Ctrl+N (like Cmd+D), Option+click ([multicursor.nvim](https://github.com/jake-stewart/multicursor.nvim)) |
 | Tabs, status bar, key hints | bufferline, lualine, which-key: press Space and wait |
 
-The full key map is in [CHEATSHEET.md](CHEATSHEET.md). Inside Neovim, press `Space` then `?`.
+The full key map is in [CHEATSHEET.md](CHEATSHEET.md). Inside Neovim, press **`?`** anywhere: a window explains every shortcut.
 
 ### Keys that differ from VS Code
 

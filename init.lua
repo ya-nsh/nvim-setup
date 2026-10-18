@@ -1,5 +1,5 @@
 -- Neovim config tuned for someone coming from VS Code.
--- New here? Press <Space>? (or run :Cheatsheet) for the key map.
+-- New here? Press ? (or run :Cheatsheet) for every shortcut, explained.
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"

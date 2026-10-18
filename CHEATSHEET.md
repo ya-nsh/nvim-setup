@@ -1,5 +1,8 @@
 # VS Code → Neovim cheatsheet
 
+Press **`?`** anywhere to open this window. In it: `Tab` / `Shift+Tab` jump between sections,
+`/` searches, and `q`, `Esc` or `?` close it.
+
 `<Space>` is the **leader** key. Press it and wait: a menu shows what comes next.
 Can't remember a key? `<Space>sk` searches every keymap. Learn Vim itself with `:Tutor`.
 
@@ -62,7 +65,7 @@ Ghostty's own search, undo and command palette moved to **Cmd+S then F / U / P**
 ## Explorer (Cmd+B)
 
 `a` new file (end with `/` for a folder) · `d` delete · `r` rename · `c` copy · `m` move ·
-`F` find in folder · `H` hidden files · `/` filter · `l` / `h` open / close · `?` all keys.
+`F` find in folder · `H` hidden files · `/` filter · `l` / `h` open / close · `?` explorer keys.
 **Right-click** a file or folder: Find in Folder, New File, Rename, Delete, Copy Path,
 Reveal in Finder, Open in Terminal, File History. Renames update imports.
 
@@ -107,6 +110,7 @@ Type to filter · `↑` / `↓` or `Ctrl+j` / `Ctrl+k` move · `Enter` open ·
 `w` / `b` word forward / back · `0` / `$` line start / end · `gg` / `G` top / bottom ·
 `Ctrl+d` / `Ctrl+u` half page · `%` matching bracket · `ciw` change word · `ci"` change inside quotes ·
 `dap` delete paragraph · `.` repeat last edit · `*` search word under cursor.
+`?` is this help, not Vim's backward search: search with `/`, then `N` goes backward.
 
 ## Housekeeping
 

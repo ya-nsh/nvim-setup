@@ -180,7 +180,7 @@ printf '\n%s%sDone!%s\n' "$green" "$bold" "$reset"
 cat <<EOF
   1. Open Ghostty (or reload it: Cmd+S then R).
   2. Run: nvim .
-  3. Press Space then ? for the cheatsheet.
+  3. Press ? for help: every shortcut, explained.
 
   Berkeley Mono is a paid font, so it isn't installed. If you own it, install it
   and Ghostty uses it automatically; until then you get JetBrains Mono.
