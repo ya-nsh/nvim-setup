@@ -17,7 +17,12 @@ Can't remember a key? `<Space>sk` searches every keymap. Learn Vim itself with `
 |---|---|---|
 | Cmd+P | Cmd+P | Quick open (also `<Space><Space>`) |
 | Cmd+Shift+P | Cmd+Shift+P | Command palette (also `<Space>sc`) |
-| Cmd+Shift+F | Cmd+Shift+F | Search in files (also `<Space>/`) |
+| Cmd+Shift+F | Cmd+Shift+F | Search in files (also `<Space>/`). With a selection: search for it |
+| Cmd+F | Cmd+F | Find in file: type, Enter, then `n` / `N` next / previous. Esc clears highlights |
+| Cmd+Z / Cmd+Shift+Z | Cmd+Z / Cmd+Shift+Z | Undo / redo (also `u` / `Ctrl+r`) |
+| Cmd+click | **Ctrl+click** | Go to definition. Terminals can't send Cmd with a click |
+| Ctrl+- / Ctrl+Shift+- | Ctrl+- / Ctrl+Shift+- | Go back / forward (also `Ctrl+o` / `Ctrl+i`, mouse side buttons) |
+| Right-click | Right-click | Menu: definition, references, rename, copy / paste, format |
 | Cmd+B | Cmd+B | Toggle explorer (also `<Space>e`) |
 | Cmd+Shift+E | Cmd+Shift+E | Show current file in explorer |
 | Cmd+/ | Cmd+/ | Toggle comment (also `gcc`, or `gc` on a selection) |
@@ -38,6 +43,8 @@ Can't remember a key? `<Space>sk` searches every keymap. Learn Vim itself with `
 
 ## Different because Ghostty uses the key
 
+Ghostty's own search, undo and command palette moved to **Cmd+S then F / U / P**.
+
 | VS Code | Here | Why |
 |---|---|---|
 | Cmd+S (save) | **Ctrl+S** | Cmd+S is your Ghostty prefix |
@@ -45,19 +52,36 @@ Can't remember a key? `<Space>sk` searches every keymap. Learn Vim itself with `
 | Cmd+D (next match) | **Ctrl+N** | Cmd+D splits Ghostty. Esc clears cursors |
 | Cmd+Shift+L (all matches) | `<Space>ma` | |
 | Option+click (add cursor) | Option+click | |
-| Cmd+F (find in file) | `/` then text, `n` / `N` next / prev | Cmd+F is Ghostty search |
 | Cmd+H (replace) | `:%s/old/new/g` | Shows a live preview |
 | Ctrl+Tab (next tab) | **Shift+L** / **Shift+H** | Same as your Ghostty tab keys |
 | Cmd+1…9 (tab N) | `<Space>1` … `<Space>9` | |
 | Cmd+G (go to line) | `42G` or `:42` | |
-| Cmd+Z / Cmd+Shift+Z | `u` / `Ctrl+r` | |
 | Cmd+C / Cmd+V | `y` / `p` | Both use the macOS clipboard. Cmd+V also pastes |
 | Shift+Alt+F (format) | `<Space>cf` | Files also format on save |
 
 ## Explorer (Cmd+B)
 
 `a` new file (end with `/` for a folder) · `d` delete · `r` rename · `c` copy · `m` move ·
-`H` hidden files · `/` filter · `l` / `h` open / close · `?` all keys. Renames update imports.
+`F` find in folder · `H` hidden files · `/` filter · `l` / `h` open / close · `?` all keys.
+**Right-click** a file or folder: Find in Folder, New File, Rename, Delete, Copy Path,
+Reveal in Finder, Open in Terminal, File History. Renames update imports.
+
+## Git, GitLens-style
+
+The end of the current line shows who last changed it, when, and the commit message.
+
+| Keys | What |
+|---|---|
+| `<Space>gc` | **Commit history.** Every commit, newest first, with the files it changed. `j` / `k` move, `Enter` (or double-click) opens a file's diff, `za` expands / collapses a commit, `L` shows full commit details |
+| `<Space>gf` | History of this file. Select lines first to see only commits that touched them |
+| `<Space>gd` | All uncommitted changes, side by side |
+| `<Space>go` | Open the commit that last changed this line |
+| `<Space>gb` | Popup: full commit message for this line |
+| `<Space>gB` | Blame the whole file in a sidebar |
+| `]h` / `[h` | Next / previous changed block in this file |
+| `<Space>gg` | lazygit: stage, commit, push, branches |
+
+In any history or diff view: `Tab` next file, `g?` all keys, `q` closes it.
 
 ## In a finder (Cmd+P, Cmd+Shift+F, ...)
 
@@ -71,10 +95,10 @@ Type to filter · `↑` / `↓` or `Ctrl+j` / `Ctrl+k` move · `Enter` open ·
 | `<Space>f` | find: files, recent, open tabs, config |
 | `<Space>s` | search: text, word, symbols, keymaps, help, undo history |
 | `<Space>c` | code: action, rename, format, organize imports, rename file |
-| `<Space>g` | git: lazygit (`gg`), changed files, log, blame, changes (`gh`) |
+| `<Space>g` | git: commits (`gc`), file history (`gf`), diff (`gd`), blame (`gb` / `gB`), lazygit (`gg`) |
 | `<Space>b` | tabs: close, close others, pin, move |
 | `<Space>m` | multi-cursor |
-| `<Space>u` | toggles: wrap, relative numbers, inlay hints, problems, format on save |
+| `<Space>u` | toggles: wrap, relative numbers, inlay hints, problems, format on save, inline blame (`ub`) |
 | `<Space>q` | quit, restore session |
 | `<Space>x` | problems |
 
@@ -82,7 +106,7 @@ Type to filter · `↑` / `↓` or `Ctrl+j` / `Ctrl+k` move · `Enter` open ·
 
 `w` / `b` word forward / back · `0` / `$` line start / end · `gg` / `G` top / bottom ·
 `Ctrl+d` / `Ctrl+u` half page · `%` matching bracket · `ciw` change word · `ci"` change inside quotes ·
-`dap` delete paragraph · `.` repeat last edit · `*` search word under cursor · `]h` / `[h` next / prev git change.
+`dap` delete paragraph · `.` repeat last edit · `*` search word under cursor.
 
 ## Housekeeping
 

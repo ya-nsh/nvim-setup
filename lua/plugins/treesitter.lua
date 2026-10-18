@@ -1,11 +1,6 @@
 -- Syntax highlighting, indentation and folding from real parsers.
 -- More languages: :TSInstall <name>
-local parsers = {
-  "bash", "css", "diff", "dockerfile", "git_config", "gitcommit", "gitignore",
-  "go", "gomod", "gosum", "graphql", "html", "javascript", "jsdoc", "json",
-  "lua", "luadoc", "markdown", "markdown_inline", "prisma", "python", "query",
-  "regex", "scss", "sql", "toml", "tsx", "typescript", "vim", "vimdoc", "yaml",
-}
+local parsers = require("config.tools").parsers
 
 return {
   {

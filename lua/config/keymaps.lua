@@ -1,13 +1,45 @@
 -- General keymaps. Plugin keymaps live next to each plugin in lua/plugins/.
 --
 -- About Cmd keys: Ghostty passes Cmd shortcuts it doesn't use itself through to
--- Neovim as <D-...>. Ghostty keeps Cmd+S (your prefix), Cmd+W, Cmd+D, Cmd+K,
--- Cmd+F, Cmd+1-9, Cmd+[ ], Cmd+C/V/Z, so those VS Code actions use other keys here.
+-- Neovim as <D-...>. ghostty/nvim.conf hands Cmd+Z, Cmd+Shift+Z, Cmd+F,
+-- Cmd+Shift+F and Cmd+Shift+P to Neovim. Ghostty keeps Cmd+S (your prefix),
+-- Cmd+W, Cmd+D, Cmd+K, Cmd+1-9, Cmd+[ ], Cmd+C/V, so those use other keys here.
 local map = vim.keymap.set
 
 -- Save. Cmd+S is Ghostty's prefix, so Ctrl+S saves.
 map({ "n", "x" }, "<C-s>", "<cmd>write<cr><esc>", { desc = "Save file" })
 map("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+
+-- Undo / redo: Cmd+Z / Cmd+Shift+Z (u / Ctrl+R also work)
+map("n", "<D-z>", "u", { desc = "Undo (Cmd+Z)" })
+map("x", "<D-z>", "<esc>u", { desc = "Undo (Cmd+Z)" })
+map("i", "<D-z>", "<C-o>u", { desc = "Undo (Cmd+Z)" })
+for _, lhs in ipairs({ "<D-S-z>", "<D-Z>" }) do -- Ghostty may report Cmd+Shift+Z either way
+  map("n", lhs, "<C-r>", { desc = "Redo (Cmd+Shift+Z)" })
+  map("x", lhs, "<esc><C-r>", { desc = "Redo (Cmd+Shift+Z)" })
+  map("i", lhs, "<C-o><C-r>", { desc = "Redo (Cmd+Shift+Z)" })
+end
+
+-- Undo in smaller steps while typing (VS Code undoes about a phrase at a time,
+-- Vim would undo the whole insert)
+for _, char in ipairs({ ",", ".", ";", "!", "?" }) do
+  map("i", char, char .. "<C-g>u")
+end
+
+-- Find in file: Cmd+F starts a search (type, Enter, then n / N for next / previous).
+-- With a selection, Cmd+F searches for the selected text.
+map("n", "<D-f>", "/", { desc = "Find in file (Cmd+F)" })
+map("i", "<D-f>", "<esc>/", { desc = "Find in file (Cmd+F)" })
+map("x", "<D-f>", "*", { remap = true, desc = "Find selection in file (Cmd+F)" })
+
+-- Back / forward through places you've been: files you opened, definitions you
+-- jumped to, searches. VS Code: Ctrl+- / Ctrl+Shift+-. Vim: Ctrl+O / Ctrl+I.
+-- Mouse back / forward buttons work too.
+map("n", "<C-->", "<C-o>", { desc = "Go back (Ctrl+-)" })
+map("n", "<C-S-->", "<C-i>", { desc = "Go forward (Ctrl+Shift+-)" })
+map("n", "<C-S-_>", "<C-i>", { desc = "Go forward (Ctrl+Shift+-)" }) -- some keyboard layouts
+map("n", "<X1Mouse>", "<C-o>", { desc = "Go back (mouse)" })
+map("n", "<X2Mouse>", "<C-i>", { desc = "Go forward (mouse)" })
 
 -- Clear search highlight with Esc
 map({ "n", "i" }, "<esc>", "<cmd>nohlsearch<cr><esc>", { desc = "Clear search highlight" })
@@ -75,6 +107,9 @@ end
 map("n", "<S-F8>", prev_problem, { desc = "Previous problem (Shift+F8)" })
 map("n", "<F20>", prev_problem, { desc = "Previous problem (Shift+F8)" }) -- how Ghostty reports Shift+F8
 map("n", "<leader>xd", vim.diagnostic.open_float, { desc = "Show problem under cursor" })
+
+-- Right-click menus (see config/context_menu.lua)
+require("config.context_menu").setup()
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit (asks to save)" })

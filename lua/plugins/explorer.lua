@@ -1,5 +1,6 @@
 -- File explorer sidebar. Inside it: a add, d delete, r rename, c copy, m move,
--- H show/hide hidden, / filter, ? all keys. Mouse clicks work too.
+-- F find in folder, H show/hide hidden, / filter, ? all keys.
+-- Mouse clicks work too; right-click a file or folder for a menu.
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -29,6 +30,16 @@ return {
           ["<space>"] = "none", -- keep <Space> as the leader key
           ["l"] = "open",
           ["h"] = "close_node",
+          ["F"] = {
+            function(state)
+              local menu = require("config.context_menu")
+              local dir = menu.folder_of_node(state)
+              if dir then
+                menu.find_in_folder(dir)
+              end
+            end,
+            desc = "Find in folder",
+          },
         },
       },
       filesystem = {

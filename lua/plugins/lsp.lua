@@ -1,22 +1,5 @@
 -- Language servers (IntelliSense), installed automatically by Mason.
 -- :Mason shows what's installed; :checkhealth vim.lsp shows what's attached.
-local servers = {
-  "vtsls", -- TypeScript / JavaScript (the same engine VS Code uses)
-  "eslint",
-  "tailwindcss",
-  "html",
-  "cssls",
-  "jsonls",
-  "yamlls",
-  "gopls",
-  "basedpyright", -- Python types
-  "ruff", -- Python lint + format
-  "lua_ls",
-}
-
--- Command-line tools used for formatting (see format.lua)
-local tools = { "prettier", "stylua", "goimports" }
-
 return {
   -- Lua completions for editing this config
   {
@@ -39,15 +22,10 @@ return {
     opts = { ui = { border = "rounded" } },
     config = function(_, opts)
       require("mason").setup(opts)
-      local registry = require("mason-registry")
-      registry.refresh(function()
-        for _, name in ipairs(tools) do
-          local ok, pkg = pcall(registry.get_package, name)
-          if ok and not pkg:is_installed() then
-            pkg:install()
-          end
-        end
-      end)
+      -- Install anything missing from config/tools.lua, off the startup path
+      vim.defer_fn(function()
+        require("config.install").background()
+      end, 3000)
     end,
   },
 
@@ -72,8 +50,13 @@ return {
 
       vim.lsp.config("vtsls", {
         settings = {
-          vtsls = { autoUseWorkspaceTsdk = true },
+          vtsls = {
+            autoUseWorkspaceTsdk = true,
+            -- Filter completions in the server: much faster in big projects
+            experimental = { completion = { enableServerSideFuzzyMatch = true } },
+          },
           typescript = {
+            tsserver = { maxTsServerMemory = 8192 }, -- room for large monorepos
             updateImportsOnFileMove = { enabled = "always" },
             suggest = { completeFunctionCalls = true },
           },
@@ -97,10 +80,9 @@ return {
         settings = { Lua = { completion = { callSnippet = "Replace" } } },
       })
 
-      -- Installs any missing servers and enables all of them. stylua is only a
-      -- formatter here (conform runs it), so don't also start it as a server.
+      -- Enables every installed server (mason.nvim installs missing ones). stylua is
+      -- only a formatter here (conform runs it), so don't also start it as a server.
       require("mason-lspconfig").setup({
-        ensure_installed = servers,
         automatic_enable = { exclude = { "stylua" } },
       })
 
@@ -117,7 +99,10 @@ return {
             Snacks.picker.lsp_references()
           end
           local function organize_imports()
-            vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
+            vim.lsp.buf.code_action({
+              context = { only = { "source.organizeImports" }, diagnostics = {} },
+              apply = true,
+            })
           end
 
           -- VS Code keys
@@ -127,10 +112,27 @@ return {
           map("n", "<F2>", vim.lsp.buf.rename, "Rename symbol (F2)")
           map({ "n", "x" }, "<D-.>", vim.lsp.buf.code_action, "Quick fix (Cmd+.)")
 
+          -- Ctrl+click a word to jump to its definition. (Cmd+click can't work:
+          -- terminals have no way to send Cmd with a mouse click.)
+          map(
+            "n",
+            "<C-LeftMouse>",
+            "<LeftMouse><Cmd>lua Snacks.picker.lsp_definitions()<CR>",
+            "Go to definition (Ctrl+click)"
+          )
+          map(
+            "i",
+            "<C-LeftMouse>",
+            "<Esc><LeftMouse><Cmd>lua Snacks.picker.lsp_definitions()<CR>",
+            "Go to definition (Ctrl+click)"
+          )
+
           -- Vim-style keys (K = hover docs is built in)
           map("n", "gd", definitions, "Go to definition")
           map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-          map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, "Go to type definition")
+          map("n", "gy", function()
+            Snacks.picker.lsp_type_definitions()
+          end, "Go to type definition")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature help")
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename symbol")
           map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action / quick fix")

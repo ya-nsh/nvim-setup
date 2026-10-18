@@ -17,7 +17,7 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
-    indent = { enabled = true },
+    indent = { enabled = true, animate = { enabled = false } }, -- no animation: feels faster
     input = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
@@ -39,6 +39,7 @@ return {
     { "<D-p>", picker("files"), desc = "Quick open (Cmd+P)" },
     { "<D-S-p>", picker("commands"), desc = "Command palette (Cmd+Shift+P)" },
     { "<D-S-f>", picker("grep"), desc = "Search in files (Cmd+Shift+F)" },
+    { "<D-S-f>", picker("grep_word"), mode = "x", desc = "Search selection in files (Cmd+Shift+F)" },
     { "<D-S-o>", picker("lsp_symbols"), desc = "Go to symbol (Cmd+Shift+O)" },
     { "<D-S-m>", picker("diagnostics"), desc = "Problems (Cmd+Shift+M)" },
     { "<C-`>", toggle_terminal, mode = { "n", "t" }, desc = "Toggle terminal (Ctrl+`)" },
@@ -67,20 +68,61 @@ return {
     { "<leader>xx", picker("diagnostics"), desc = "Problems" },
 
     -- Git
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    {
+      "<leader>gg",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "Lazygit",
+    },
     { "<leader>gs", picker("git_status"), desc = "Changed files" },
-    { "<leader>gl", picker("git_log"), desc = "Git log" },
-    { "<leader>gf", picker("git_log_file"), desc = "Git log for this file" },
+    { "<leader>gl", picker("git_log"), desc = "Git log (quick search)" },
 
     -- Tabs (buffers)
-    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Close tab" },
-    { "<leader>bo", function() Snacks.bufdelete.other() end, desc = "Close other tabs" },
+    {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Close tab",
+    },
+    {
+      "<leader>bo",
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = "Close other tabs",
+    },
 
     -- Misc
-    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename file (updates imports)" },
-    { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification history" },
-    { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference" },
-    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference" },
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename file (updates imports)",
+    },
+    {
+      "<leader>n",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Notification history",
+    },
+    {
+      "]]",
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = "Next reference",
+    },
+    {
+      "[[",
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = "Previous reference",
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
