@@ -24,8 +24,14 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = { { import = "plugins" } },
   install = { colorscheme = { "gruvbox-material", "habamax" } },
-  checker = { enabled = true, notify = false }, -- check for updates quietly; :Lazy shows them
+  checker = { enabled = true, notify = false, frequency = 86400 }, -- check for updates daily, quietly; :Lazy shows them
   change_detection = { notify = false },
   rocks = { enabled = false },
   ui = { border = "rounded" },
+  performance = {
+    rtp = {
+      -- Built-in plugins this setup replaces or never uses; skipping them speeds up startup
+      disabled_plugins = { "gzip", "netrwPlugin", "rplugin", "tarPlugin", "tohtml", "zipPlugin" },
+    },
+  },
 })

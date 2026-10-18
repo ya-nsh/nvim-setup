@@ -13,12 +13,22 @@ return {
       mc.setup()
       local map = vim.keymap.set
 
-      map({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end, { desc = "Add cursor at next match (like Cmd+D)" })
-      map({ "n", "x" }, "<leader>mn", function() mc.matchAddCursor(1) end, { desc = "Add cursor at next match" })
-      map({ "n", "x" }, "<leader>ms", function() mc.matchSkipCursor(1) end, { desc = "Skip this match" })
+      map({ "n", "x" }, "<C-n>", function()
+        mc.matchAddCursor(1)
+      end, { desc = "Add cursor at next match (like Cmd+D)" })
+      map({ "n", "x" }, "<leader>mn", function()
+        mc.matchAddCursor(1)
+      end, { desc = "Add cursor at next match" })
+      map({ "n", "x" }, "<leader>ms", function()
+        mc.matchSkipCursor(1)
+      end, { desc = "Skip this match" })
       map({ "n", "x" }, "<leader>ma", mc.matchAllAddCursors, { desc = "Cursor on every match (like Cmd+Shift+L)" })
-      map({ "n", "x" }, "<leader>mj", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
-      map({ "n", "x" }, "<leader>mk", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
+      map({ "n", "x" }, "<leader>mj", function()
+        mc.lineAddCursor(1)
+      end, { desc = "Add cursor below" })
+      map({ "n", "x" }, "<leader>mk", function()
+        mc.lineAddCursor(-1)
+      end, { desc = "Add cursor above" })
       map("n", "<M-LeftMouse>", mc.handleMouse, { desc = "Add cursor at click (Option+Click)" })
       map("n", "<M-LeftDrag>", mc.handleMouseDrag)
       map("n", "<M-LeftRelease>", mc.handleMouseRelease)
@@ -45,9 +55,27 @@ return {
     event = "BufReadPre",
     opts = {},
     keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Restore session for this folder" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore last session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't save this session" },
+      {
+        "<leader>qs",
+        function()
+          require("persistence").load()
+        end,
+        desc = "Restore session for this folder",
+      },
+      {
+        "<leader>ql",
+        function()
+          require("persistence").load({ last = true })
+        end,
+        desc = "Restore last session",
+      },
+      {
+        "<leader>qd",
+        function()
+          require("persistence").stop()
+        end,
+        desc = "Don't save this session",
+      },
     },
   },
 }
