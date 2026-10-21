@@ -163,7 +163,7 @@ if [ "$GHOSTTY" -eq 1 ]; then
   else
     # Keep your Ghostty config; just add the Neovim keys to it
     cp "$existing" "$existing.bak-$STAMP"
-    printf '\n# nvim-setup: let Cmd+Z, Cmd+F, Cmd+Shift+F, Cmd+Shift+P reach Neovim\nconfig-file = %s\n' \
+    printf '\n# nvim-setup: let Cmd+C, Cmd+Z, Cmd+F, Cmd+Shift+F, Cmd+Shift+P reach Neovim\nconfig-file = %s\n' \
       "$GHOSTTY_KEYS" >>"$existing"
     info "Added Neovim keys to $existing (backup: $existing.bak-$STAMP)"
   fi

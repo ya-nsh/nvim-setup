@@ -30,7 +30,7 @@ Options: `--skip-brew` (manage packages yourself), `--no-ghostty`.
 | | |
 |---|---|
 | Quick open, command palette, search in files | Cmd+P, Cmd+Shift+P, Cmd+Shift+F ([snacks.nvim](https://github.com/folke/snacks.nvim) picker) |
-| Find in file, undo / redo | Cmd+F, Cmd+Z / Cmd+Shift+Z |
+| Copy / cut / paste, find in file, undo / redo | Cmd+C / Cmd+X / Cmd+V, Cmd+F, Cmd+Z / Cmd+Shift+Z |
 | Go to definition / references / rename | Ctrl+click or F12, Shift+F12, F2, and in the right-click menu |
 | Back / forward | Ctrl+- / Ctrl+Shift+-, or the mouse side buttons |
 | File explorer | Cmd+B. Right-click a folder for **Find in Folder**, New File, Rename, Reveal in Finder... ([neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)) |
