@@ -2,13 +2,25 @@
 --
 -- About Cmd keys: Ghostty passes Cmd shortcuts it doesn't use itself through to
 -- Neovim as <D-...>. ghostty/nvim.conf hands Cmd+Z, Cmd+Shift+Z, Cmd+F,
--- Cmd+Shift+F and Cmd+Shift+P to Neovim. Ghostty keeps Cmd+S (your prefix),
--- Cmd+W, Cmd+D, Cmd+K, Cmd+1-9, Cmd+[ ], Cmd+C/V, so those use other keys here.
+-- Cmd+Shift+F and Cmd+Shift+P to Neovim, and Cmd+C when Ghostty has no selection
+-- of its own. Ghostty keeps Cmd+S (your prefix), Cmd+W, Cmd+D, Cmd+K, Cmd+1-9,
+-- Cmd+[ ], so those use other keys here.
 local map = vim.keymap.set
 
 -- Save. Cmd+S is Ghostty's prefix, so Ctrl+S saves.
 map({ "n", "x" }, "<C-s>", "<cmd>write<cr><esc>", { desc = "Save file" })
 map("i", "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+
+-- Copy / cut: Cmd+C / Cmd+X, like VS Code. With a selection they copy / cut it
+-- (the selection stays after copying); with none they copy / cut the whole line.
+-- Cmd+V needs no mapping: Ghostty pastes the clipboard straight into Neovim.
+-- (y / d / p use the same macOS clipboard.)
+map("x", "<D-c>", '"+ygv', { desc = "Copy (Cmd+C)" })
+map("n", "<D-c>", '"+yy', { desc = "Copy line (Cmd+C)" })
+map("i", "<D-c>", '<C-o>"+yy', { desc = "Copy line (Cmd+C)" })
+map("x", "<D-x>", '"+d', { desc = "Cut (Cmd+X)" })
+map("n", "<D-x>", '"+dd', { desc = "Cut line (Cmd+X)" })
+map("i", "<D-x>", '<C-o>"+dd', { desc = "Cut line (Cmd+X)" })
 
 -- Undo / redo: Cmd+Z / Cmd+Shift+Z (u / Ctrl+R also work)
 map("n", "<D-z>", "u", { desc = "Undo (Cmd+Z)" })

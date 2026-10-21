@@ -23,6 +23,7 @@ Can't remember a key? `<Space>sk` searches every keymap. Learn Vim itself with `
 | Cmd+Shift+F | Cmd+Shift+F | Search in files (also `<Space>/`). With a selection: search for it |
 | Cmd+F | Cmd+F | Find in file: type, Enter, then `n` / `N` next / previous. Esc clears highlights |
 | Cmd+Z / Cmd+Shift+Z | Cmd+Z / Cmd+Shift+Z | Undo / redo (also `u` / `Ctrl+r`) |
+| Cmd+C / Cmd+X / Cmd+V | same | Copy / cut / paste. With nothing selected, Cmd+C / Cmd+X take the whole line. `y` / `d` / `p` use the same clipboard |
 | Cmd+click | **Ctrl+click** | Go to definition. Terminals can't send Cmd with a click |
 | Ctrl+- / Ctrl+Shift+- | Ctrl+- / Ctrl+Shift+- | Go back / forward (also `Ctrl+o` / `Ctrl+i`, mouse side buttons) |
 | Right-click | Right-click | Menu: definition, references, rename, copy / paste, format |
@@ -59,7 +60,6 @@ Ghostty's own search, undo and command palette moved to **Cmd+S then F / U / P**
 | Ctrl+Tab (next tab) | **Shift+L** / **Shift+H** | Same as your Ghostty tab keys |
 | Cmd+1…9 (tab N) | `<Space>1` … `<Space>9` | |
 | Cmd+G (go to line) | `42G` or `:42` | |
-| Cmd+C / Cmd+V | `y` / `p` | Both use the macOS clipboard. Cmd+V also pastes |
 | Shift+Alt+F (format) | `<Space>cf` | Files also format on save |
 
 ## Explorer (Cmd+B)
