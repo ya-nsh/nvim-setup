@@ -69,22 +69,41 @@ Ghostty's own search, undo and command palette moved to **Cmd+S then F / U / P**
 **Right-click** a file or folder: Find in Folder, New File, Rename, Delete, Copy Path,
 Reveal in Finder, Open in Terminal, File History. Renames update imports.
 
-## Git, GitLens-style
+## Git: Source Control + GitLens
 
-The end of the current line shows who last changed it, when, and the commit message.
+**Ctrl+Shift+G** (or `<Space>gs`) opens Source Control, like VS Code: your files under
+**Staged Changes** and **Changes**. **Click a file** to see its diff. Each pane is titled:
+**Before** (red, what it was) on the left, **After** (green, what it is now) on the right,
+and the exact words that changed are brighter. On a narrow window the two merge into one column.
+
+| In Source Control | What |
+|---|---|
+| Click / `Enter` | Open a file's diff, or fold a folder |
+| `-` | Stage / unstage the file (works in the diff too) |
+| `S` / `U` | Stage all / unstage all |
+| `X` | Discard the file's changes |
+| `c` | Commit (with nothing staged, it offers to stage everything) |
+| `P` | Push |
+| `]c` / `[c` | Next / previous change in the diff · `]f` / `[f` next / previous file |
+| `t` | Switch between side by side and one column |
+| `Cmd+B` | Hide / show the file list · `i` list vs folders |
+| `?` | Every key for this panel · `q` closes it |
+
+`??` beside a file means it's new and not in git yet.
 
 | Keys | What |
 |---|---|
-| `<Space>gc` | **Commit history.** Every commit, newest first, with the files it changed. `j` / `k` move, `Enter` (or double-click) opens a file's diff, `za` expands / collapses a commit, `L` shows full commit details |
+| `<Space>gc` | **Commit history**, like GitLens: message · author · when. Click a commit to see its files, click a file to see what that commit changed |
 | `<Space>gf` | History of this file. Select lines first to see only commits that touched them |
-| `<Space>gd` | All uncommitted changes, side by side |
+| `<Space>gd` | Diff this file against the last commit |
 | `<Space>go` | Open the commit that last changed this line |
 | `<Space>gb` | Popup: full commit message for this line |
 | `<Space>gB` | Blame the whole file in a sidebar |
 | `]h` / `[h` | Next / previous changed block in this file |
-| `<Space>gg` | lazygit: stage, commit, push, branches |
+| `<Space>ub` | Turn the end-of-line blame on / off |
+| `<Space>gg` | lazygit: branches, stashes, rebases, everything else |
 
-In any history or diff view: `Tab` next file, `g?` all keys, `q` closes it.
+The end of the current line always shows who last changed it, when, and the commit message.
 
 ## In a finder (Cmd+P, Cmd+Shift+F, ...)
 
@@ -98,7 +117,7 @@ Type to filter · `↑` / `↓` or `Ctrl+j` / `Ctrl+k` move · `Enter` open ·
 | `<Space>f` | find: files, recent, open tabs, config |
 | `<Space>s` | search: text, word, symbols, keymaps, help, undo history |
 | `<Space>c` | code: action, rename, format, organize imports, rename file |
-| `<Space>g` | git: commits (`gc`), file history (`gf`), diff (`gd`), blame (`gb` / `gB`), lazygit (`gg`) |
+| `<Space>g` | git: Source Control (`gs`), commits (`gc`), file history (`gf`), diff (`gd`), blame (`gb` / `gB`), lazygit (`gg`) |
 | `<Space>b` | tabs: close, close others, pin, move |
 | `<Space>m` | multi-cursor |
 | `<Space>u` | toggles: wrap, relative numbers, inlay hints, problems, format on save, inline blame (`ub`) |

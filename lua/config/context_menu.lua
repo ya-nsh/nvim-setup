@@ -193,14 +193,14 @@ local function explorer_menu(winid)
     add({
       "Show Folder History",
       function()
-        vim.cmd("DiffviewFileHistory " .. vim.fn.fnameescape(path))
+        vim.cmd("CodeDiff history " .. vim.fn.fnameescape(path))
       end,
     })
   else
     add({
       "Show File History",
       function()
-        vim.cmd("DiffviewFileHistory " .. vim.fn.fnameescape(path))
+        vim.cmd("CodeDiff history " .. vim.fn.fnameescape(path))
       end,
     })
   end

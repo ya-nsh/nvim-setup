@@ -36,7 +36,7 @@ Options: `--skip-brew` (manage packages yourself), `--no-ghostty`.
 | File explorer | Cmd+B. Right-click a folder for **Find in Folder**, New File, Rename, Reveal in Finder... ([neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)) |
 | IntelliSense | TypeScript/JavaScript (vtsls), ESLint, Tailwind, HTML, CSS, JSON, YAML, Go, Python (basedpyright + ruff), Lua, via [Mason](https://github.com/mason-org/mason.nvim). Completion by [blink.cmp](https://github.com/saghen/blink.cmp) |
 | Format on save | prettier, ruff, goimports, stylua ([conform.nvim](https://github.com/stevearc/conform.nvim)) |
-| Git, GitLens-style | inline blame, commit history you can expand to see each file's diff, file and line history ([gitsigns](https://github.com/lewis6991/gitsigns.nvim), [diffview](https://github.com/sindrets/diffview.nvim)), lazygit |
+| Source Control + GitLens | Ctrl+Shift+G: staged / changed files; click one for a VS Code-style diff (titled Before / After panes, word-level highlights), stage, discard, commit, push. Commit history with author and age, file and line history, inline blame ([codediff.nvim](https://github.com/esmuellert/codediff.nvim), [gitsigns](https://github.com/lewis6991/gitsigns.nvim)), lazygit |
 | Multiple cursors | Ctrl+N (like Cmd+D), Option+click ([multicursor.nvim](https://github.com/jake-stewart/multicursor.nvim)) |
 | Tabs, status bar, key hints | bufferline, lualine, which-key: press Space and wait |
 
