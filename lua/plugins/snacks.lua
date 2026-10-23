@@ -75,7 +75,6 @@ return {
       end,
       desc = "Lazygit",
     },
-    { "<leader>gs", picker("git_status"), desc = "Changed files" },
     { "<leader>gl", picker("git_log"), desc = "Git log (quick search)" },
 
     -- Tabs (buffers)

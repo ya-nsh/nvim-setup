@@ -24,6 +24,13 @@ for _, plugin in ipairs(require("lazy").plugins()) do
   end
 end
 
+step("Installing the VS Code diff engine (codediff.nvim)")
+require("lazy").load({ plugins = { "codediff.nvim" } })
+local diff_ok, diff_err = require("codediff.core.installer.libvscode_diff").install({ silent = true })
+if not diff_ok then
+  failed[#failed + 1] = "codediff diff library: " .. tostring(diff_err)
+end
+
 step("Installing syntax parsers")
 require("lazy").load({ plugins = { "nvim-treesitter" } })
 local parsers = require("config.tools").parsers
